@@ -16,6 +16,27 @@ export class RestaurantService {
             }
         })
     }
+    static async findAllRestaurant() {
+        return await Restaurant.findAll({
+            where: {
+                status: "true"
+            },
+            include: [
+                {
+                  model: User,
+                },
+              ],
+            
+        })
+    } 
+
+    static async updateRestaurant(Restaurant) {
+        return await Restaurant.update({ status: "completed" });
+    } 
+
+    static async deleteRestaurant(Restaurant) {
+        return await Restaurant.update({ status: "cancelled" });
+    } 
 
     static async createReview(data) {
         return Review.create(data)
@@ -34,5 +55,13 @@ export class RestaurantService {
             ]
         })
     }
+
+    static async updateReview(Review) {
+        return await Review.update({ status: "completed" });
+      }
+    
+      static async deleteReview(Review) {
+        return await Review.update({ status: "cancelled" });
+      }
 }
 

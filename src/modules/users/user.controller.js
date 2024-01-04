@@ -45,7 +45,7 @@ export const login = catchAsync(async(req,res,next) => {
 
   //2. validar que el usuario exista en la base de datos
   const user = await UserService.findOneByEmail(userData.email);
-
+ 
   if (!user) {
     return next(new AppError('This account does not exist', 404));
   }

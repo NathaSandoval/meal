@@ -12,12 +12,12 @@ router.route('/')
 .get(findAllRestaurant)
 
 router.route('/:id')
-.get(findOneRestaurant)
-.patch(updateRestaurant)
-.delete(deleteRestaurant)
+.get(validExistRestaurant,findOneRestaurant)
+.patch(validExistRestaurant, protectAccountOwner, updateRestaurant)
+.delete(validExistRestaurant, protectAccountOwner, deleteRestaurant)
 
 router.post('/reviews/:id', validExistRestaurant, createReview)
 
 router.route('/reviews/:restaurantId/:id')
-    .patch(updateReview)
+    .patch(validExistRestaurant, validExistReview, protectAccountOwner, updateReview)
     .delete(validExistRestaurant, validExistReview, protectAccountOwner, deleteReview)
